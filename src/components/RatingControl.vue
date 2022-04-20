@@ -1,21 +1,25 @@
 <template>
     <ul>
-        <li :class="{active : activeOption === 'poor'}"><button type="button" @click="activate('poor')">Poor</button></li>
-        <li :class="{active : activeOption === 'average'}"><button type="button" @click="activate('average')">Average</button></li>
-        <li :class="{active : activeOption === 'great'}"><button type="button" @click="activate('great')">Great</button></li>
+        <li :class="{active : modelValue === 'poor'}"><button type="button" @click="activate('poor')">Poor</button></li>
+        <li :class="{active : modelValue === 'average'}"><button type="button" @click="activate('average')">Average</button></li>
+        <li :class="{active : modelValue === 'great'}"><button type="button" @click="activate('great')">Great</button></li>
     </ul>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-            activeOption:null
-        }
-    },
+    props: ['modelValue'], // :model-value="" == is v-bind
+    $emit: ['update:modelValue'], //@update:modelVaue="" == is v-click
+
+    // data(){
+    //     return{
+    //         activeOption: this.modelValue,
+    //     }
+    // },
     methods: {
         activate(option){
-            this.activeOption = option;
+            // this.activeOption = option;
+            this.$emit('update:modelValue', option);
         }
     },
 }
